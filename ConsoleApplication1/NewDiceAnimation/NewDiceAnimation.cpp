@@ -68,12 +68,6 @@ const int dicePatterns[6][SIZE_XY][SIZE_XY] =
 	}  // 6
 };
 
-// Структура для хранения координат
-struct Location
-{
-	int x;
-	int y;
-};
 
 // Структура для хранения состояния кубика (координаты и скорости)
 struct Dice
@@ -211,6 +205,7 @@ void StopSpeed(Dice& dice, int stop_threshold, bool typeSpeed)
 }
 
 
+// Разрешаем коллизии
 void ResolveOverlap(Dice& a, Dice& b)
 {
 	int overlapX = std::min(a.x + FULLSIZE_X, b.x + FULLSIZE_X) - std::max(a.x, b.x);
@@ -225,7 +220,7 @@ void ResolveOverlap(Dice& a, Dice& b)
 		a.vx = -a.vx;
 		b.vx = -b.vx;
 	}
-	else // Смещение по Y
+	else					// Смещение по Y
 	{
 		if (a.y < b.y)
 			a.y -= overlapY / 2, b.y += overlapY / 2;
@@ -237,6 +232,7 @@ void ResolveOverlap(Dice& a, Dice& b)
 }
 
 
+// Отскоки у кубиков
 void ElasticCollision(Dice& a, Dice& b)
 {
 	float tempVx = 1.01;
@@ -246,10 +242,7 @@ void ElasticCollision(Dice& a, Dice& b)
 	a.vy *= tempVy;
 	b.vx *= tempVx;
 	b.vy *= tempVy;
-
-
 }
-
 
 
 // Отталкивание кубиков от стенок
@@ -292,6 +285,7 @@ void KeepInsideBounds(Dice diceArray[], size_t dicesSize)
 }
 
 
+// Функция для рандома
 int GenerateRandomSize(int i)
 {
 	static bool initialized = false;
@@ -304,6 +298,7 @@ int GenerateRandomSize(int i)
 	return rand() % i + 1;
 }
 
+
 // Случайная грань для анимации
 void GenerateDiceFaces(Dice diceArray[], size_t dicesSize)
 {
@@ -314,6 +309,7 @@ void GenerateDiceFaces(Dice diceArray[], size_t dicesSize)
 }
 
 
+// Проверка на остановку анимаций
 bool StopAnimation(Dice diceArray[], size_t dicesSize)
 {
 	std::vector<bool> tempSpeeds(dicesSize);
@@ -321,18 +317,14 @@ bool StopAnimation(Dice diceArray[], size_t dicesSize)
 	for (size_t currentDice = 0; currentDice < dicesSize; currentDice++)
 	{
 		tempSpeeds[currentDice] = false;
-		//if (diceArray[currentDice].y >= MAX_INDENT_Y && abs(diceArray[currentDice].vx) <= stop_threshold && abs(diceArray[currentDice].vy) <= stop_threshold)
 		if (abs(diceArray[currentDice].vx) <= stop_threshold && abs(diceArray[currentDice].vy) <= stop_threshold)
 		{
 			tempSpeeds[currentDice] = true;
 		}
-
-		//std::cout << "vx: " << abs(diceArray[currentDice].vx) << "vy: " << abs(diceArray[currentDice].vy) << std::endl;
 	}
 
 	return std::all_of(tempSpeeds.begin(), tempSpeeds.end(), [](bool b) { return b; });
 }
-
 
 
 
@@ -399,14 +391,14 @@ int main()
 		DisplayFrame(diceArray, diceQuantity);
 
 
-		// Условие остановки анимации: кубики на полу и скорости близки к нулю
+		// Условие остановки анимации: скорости близки к нулю
 		if (StopAnimation(diceArray, diceQuantity)) break;
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(time_step));	// Пауза между кадрами
 	}
 
-	system(CLEAR_SCREEN);													// Очищаем экран перед выводом результата
-	DisplayFrame(diceArray, diceQuantity);									// Отображаем кубик с результатом
+	system(CLEAR_SCREEN);
+	DisplayFrame(diceArray, diceQuantity);									// Отображаем кубики с результатом
 
 	int result = 0;
 	for (size_t i = 0; i < diceQuantity; i++)
