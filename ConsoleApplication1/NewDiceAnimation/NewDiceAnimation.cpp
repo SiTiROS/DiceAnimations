@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <vector>
 #include <cstdlib>
 #include <ctime>
@@ -15,25 +15,25 @@
 #endif
 
 
-const int		SIZE_XY = 3;											// Размер кубика (3x3)
-const int		FULLSIZE_X = 9;											// Размер кубика с учётом окантовки (5x9) - Горизонтальная координата
-const int		FULLSIZE_Y = 5;											// Размер кубика с учётом окантовки (5x9) - Вертикальная координата
-const int		MAX_INDENT_X = 40;										// Ширина рамки экрана
-const int		MAX_INDENT_Y = 20;										// Высота рамки экрана
-const int		FRAME_WIDTH = MAX_INDENT_X + FULLSIZE_X + 1;			// Ширина рамки (с учетом отступов кубика)
-const int		FRAME_HEIGHT = MAX_INDENT_Y + FULLSIZE_Y + 1;			// Высота рамки (с учетом отступов кубика)
+const int		SIZE_XY = 3;											// Р Р°Р·РјРµСЂ РєСѓР±РёРєР° (3x3)
+const int		FULLSIZE_X = 9;											// Р Р°Р·РјРµСЂ РєСѓР±РёРєР° СЃ СѓС‡С‘С‚РѕРј РѕРєР°РЅС‚РѕРІРєРё (5x9) - Р“РѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅР°СЏ РєРѕРѕСЂРґРёРЅР°С‚Р°
+const int		FULLSIZE_Y = 5;											// Р Р°Р·РјРµСЂ РєСѓР±РёРєР° СЃ СѓС‡С‘С‚РѕРј РѕРєР°РЅС‚РѕРІРєРё (5x9) - Р’РµСЂС‚РёРєР°Р»СЊРЅР°СЏ РєРѕРѕСЂРґРёРЅР°С‚Р°
+const int		MAX_INDENT_X = 40;										// РЁРёСЂРёРЅР° СЂР°РјРєРё СЌРєСЂР°РЅР°
+const int		MAX_INDENT_Y = 20;										// Р’С‹СЃРѕС‚Р° СЂР°РјРєРё СЌРєСЂР°РЅР°
+const int		FRAME_WIDTH = MAX_INDENT_X + FULLSIZE_X + 1;			// РЁРёСЂРёРЅР° СЂР°РјРєРё (СЃ СѓС‡РµС‚РѕРј РѕС‚СЃС‚СѓРїРѕРІ РєСѓР±РёРєР°)
+const int		FRAME_HEIGHT = MAX_INDENT_Y + FULLSIZE_Y + 1;			// Р’С‹СЃРѕС‚Р° СЂР°РјРєРё (СЃ СѓС‡РµС‚РѕРј РѕС‚СЃС‚СѓРїРѕРІ РєСѓР±РёРєР°)
 
 const int		diceQuantity = 3;
-const float		gravity = 2;											// Ускорение свободного падения (в пикселях/кадр^2)
-const int		damping = 8;											// Демпфирование при отскоке (делитель на 10, т.е. 0.8)
-const float		friction = 8;											// Трение (делитель на 10, т.е. 0.9)
-const float		stop_threshold = 1.1;									// Порог остановки (если скорость меньше, считаем, что кубик остановился)
-const int		time_step = 6;											// Фиксированный шаг времени для физики (в миллисекундах)
-const int		roll_duration_ms = 1000;								// Общая длительность анимации (в миллисекундах)
-const int		num_frames = roll_duration_ms / time_step;				// Количество кадров анимации
+const float		gravity = 2;											// РЈСЃРєРѕСЂРµРЅРёРµ СЃРІРѕР±РѕРґРЅРѕРіРѕ РїР°РґРµРЅРёСЏ (РІ РїРёРєСЃРµР»СЏС…/РєР°РґСЂ^2)
+const int		damping = 8;											// Р”РµРјРїС„РёСЂРѕРІР°РЅРёРµ РїСЂРё РѕС‚СЃРєРѕРєРµ (РґРµР»РёС‚РµР»СЊ РЅР° 10, С‚.Рµ. 0.8)
+const float		friction = 8;											// РўСЂРµРЅРёРµ (РґРµР»РёС‚РµР»СЊ РЅР° 10, С‚.Рµ. 0.9)
+const float		stop_threshold = 1.1;									// РџРѕСЂРѕРі РѕСЃС‚Р°РЅРѕРІРєРё (РµСЃР»Рё СЃРєРѕСЂРѕСЃС‚СЊ РјРµРЅСЊС€Рµ, СЃС‡РёС‚Р°РµРј, С‡С‚Рѕ РєСѓР±РёРє РѕСЃС‚Р°РЅРѕРІРёР»СЃСЏ)
+const int		time_step = 6;											// Р¤РёРєСЃРёСЂРѕРІР°РЅРЅС‹Р№ С€Р°Рі РІСЂРµРјРµРЅРё РґР»СЏ С„РёР·РёРєРё (РІ РјРёР»Р»РёСЃРµРєСѓРЅРґР°С…)
+const int		roll_duration_ms = 1000;								// РћР±С‰Р°СЏ РґР»РёС‚РµР»СЊРЅРѕСЃС‚СЊ Р°РЅРёРјР°С†РёРё (РІ РјРёР»Р»РёСЃРµРєСѓРЅРґР°С…)
+const int		num_frames = roll_duration_ms / time_step;				// РљРѕР»РёС‡РµСЃС‚РІРѕ РєР°РґСЂРѕРІ Р°РЅРёРјР°С†РёРё
 
 
-// Массив граней кубика. Каждая грань - 3x3 матрица.
+// РњР°СЃСЃРёРІ РіСЂР°РЅРµР№ РєСѓР±РёРєР°. РљР°Р¶РґР°СЏ РіСЂР°РЅСЊ - 3x3 РјР°С‚СЂРёС†Р°.
 const int dicePatterns[6][SIZE_XY][SIZE_XY] =
 {
 	{
@@ -68,25 +68,25 @@ const int dicePatterns[6][SIZE_XY][SIZE_XY] =
 	}  // 6
 };
 
-// Структура для хранения координат
+// РЎС‚СЂСѓРєС‚СѓСЂР° РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РєРѕРѕСЂРґРёРЅР°С‚
 struct Location
 {
 	int x;
 	int y;
 };
 
-// Структура для хранения состояния кубика (координаты и скорости)
+// РЎС‚СЂСѓРєС‚СѓСЂР° РґР»СЏ С…СЂР°РЅРµРЅРёСЏ СЃРѕСЃС‚РѕСЏРЅРёСЏ РєСѓР±РёРєР° (РєРѕРѕСЂРґРёРЅР°С‚С‹ Рё СЃРєРѕСЂРѕСЃС‚Рё)
 struct Dice
 {
-	int x;					// Горизонтальная координата (отступ слева)
-	int y;					// Вертикальная координата (отступ сверху)
-	float vx;				// Горизонтальная скорость
-	float vy;				// Вертикальная скорость
-	int face;				// Сторона кубика
+	int x;					// Р“РѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅР°СЏ РєРѕРѕСЂРґРёРЅР°С‚Р° (РѕС‚СЃС‚СѓРї СЃР»РµРІР°)
+	int y;					// Р’РµСЂС‚РёРєР°Р»СЊРЅР°СЏ РєРѕРѕСЂРґРёРЅР°С‚Р° (РѕС‚СЃС‚СѓРї СЃРІРµСЂС…Сѓ)
+	float vx;				// Р“РѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅР°СЏ СЃРєРѕСЂРѕСЃС‚СЊ
+	float vy;				// Р’РµСЂС‚РёРєР°Р»СЊРЅР°СЏ СЃРєРѕСЂРѕСЃС‚СЊ
+	int face;				// РЎС‚РѕСЂРѕРЅР° РєСѓР±РёРєР°
 };
 
 
-// Функция для заполнения массива кубика
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ РјР°СЃСЃРёРІР° РєСѓР±РёРєР°
 void CreateDice(char(&Dicearray)[FULLSIZE_Y][FULLSIZE_X], int face)
 {
 	// +-------+
@@ -95,7 +95,7 @@ void CreateDice(char(&Dicearray)[FULLSIZE_Y][FULLSIZE_X], int face)
 	// | * * * |
 	// +-------+
 
-	// Очищаем массив, заполняя пробелами
+	// РћС‡РёС‰Р°РµРј РјР°СЃСЃРёРІ, Р·Р°РїРѕР»РЅСЏСЏ РїСЂРѕР±РµР»Р°РјРё
 	for (int i = 0; i < FULLSIZE_Y; ++i)
 	{
 		for (int j = 0; j < FULLSIZE_X; ++j)
@@ -104,26 +104,26 @@ void CreateDice(char(&Dicearray)[FULLSIZE_Y][FULLSIZE_X], int face)
 		}
 	}
 
-	// Рамка кубика
+	// Р Р°РјРєР° РєСѓР±РёРєР°
 	const char* border = "+-------+";
 	for (int j = 0; j < FULLSIZE_X; ++j)
 	{
-		Dicearray[0][j] = border[j];							// Верхняя граница
-		Dicearray[FULLSIZE_Y - 1][j] = border[j];				// Нижняя граница
+		Dicearray[0][j] = border[j];							// Р’РµСЂС…РЅСЏСЏ РіСЂР°РЅРёС†Р°
+		Dicearray[FULLSIZE_Y - 1][j] = border[j];				// РќРёР¶РЅСЏСЏ РіСЂР°РЅРёС†Р°
 	}
 
-	// Заполняем звёздочками
+	// Р—Р°РїРѕР»РЅСЏРµРј Р·РІС‘Р·РґРѕС‡РєР°РјРё
 	for (int i = 0; i < SIZE_XY; ++i)
 	{
 		for (int j = 0; j < SIZE_XY; ++j)
 		{
-			Dicearray[i + 1][0] = '|';							// Левая грань
-			Dicearray[i + 1][FULLSIZE_X - 1] = '|';				// Правая грань
+			Dicearray[i + 1][0] = '|';							// Р›РµРІР°СЏ РіСЂР°РЅСЊ
+			Dicearray[i + 1][FULLSIZE_X - 1] = '|';				// РџСЂР°РІР°СЏ РіСЂР°РЅСЊ
 
 			if (dicePatterns[face - 1][i][j] == 1)
 			{
-				int x = i + 1;									// Смещение по X
-				int y = 2 + j * 2;								// Смещение по Y
+				int x = i + 1;									// РЎРјРµС‰РµРЅРёРµ РїРѕ X
+				int y = 2 + j * 2;								// РЎРјРµС‰РµРЅРёРµ РїРѕ Y
 				Dicearray[x][y] = '*';
 			}
 		}
@@ -131,41 +131,41 @@ void CreateDice(char(&Dicearray)[FULLSIZE_Y][FULLSIZE_X], int face)
 }
 
 
-// Функция для отображения всего игрового поля с кубиком внутри
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РІСЃРµРіРѕ РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ СЃ РєСѓР±РёРєРѕРј РІРЅСѓС‚СЂРё
 void DisplayFrame(Dice dice[], size_t dicesSize)
 {
-	std::vector<std::string> frame(FRAME_HEIGHT);	// Создаем вектор строк - заполняем строки сверху вниз горизонтальными линиями
+	std::vector<std::string> frame(FRAME_HEIGHT);	// РЎРѕР·РґР°РµРј РІРµРєС‚РѕСЂ СЃС‚СЂРѕРє - Р·Р°РїРѕР»РЅСЏРµРј СЃС‚СЂРѕРєРё СЃРІРµСЂС…Сѓ РІРЅРёР· РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅС‹РјРё Р»РёРЅРёСЏРјРё
 
-	// Заполняем верх и ниж границы рамки
+	// Р—Р°РїРѕР»РЅСЏРµРј РІРµСЂС… Рё РЅРёР¶ РіСЂР°РЅРёС†С‹ СЂР°РјРєРё
 	for (int i = 0; i < FRAME_WIDTH; ++i)
 	{
-		frame[0] += "-";							// Самая верхняя строка
+		frame[0] += "-";							// РЎР°РјР°СЏ РІРµСЂС…РЅСЏСЏ СЃС‚СЂРѕРєР°
 	}
 	for (int i = 0; i < FRAME_WIDTH; ++i)
 	{
-		frame[FRAME_HEIGHT - 1] += "-";				// Самая нижняя строка
+		frame[FRAME_HEIGHT - 1] += "-";				// РЎР°РјР°СЏ РЅРёР¶РЅСЏСЏ СЃС‚СЂРѕРєР°
 	}
 
 
-	// Заполняем боковые границы рамки и пробелы внутри
-	for (int i = 1; i < FRAME_HEIGHT - 1; ++i)		// Идём по горизонтали
+	// Р—Р°РїРѕР»РЅСЏРµРј Р±РѕРєРѕРІС‹Рµ РіСЂР°РЅРёС†С‹ СЂР°РјРєРё Рё РїСЂРѕР±РµР»С‹ РІРЅСѓС‚СЂРё
+	for (int i = 1; i < FRAME_HEIGHT - 1; ++i)		// РРґС‘Рј РїРѕ РіРѕСЂРёР·РѕРЅС‚Р°Р»Рё
 	{
-		frame[i] += "|";							// Левая граница
-		for (int j = 1; j < FRAME_WIDTH - 1; ++j)	// Идём по вертикали
+		frame[i] += "|";							// Р›РµРІР°СЏ РіСЂР°РЅРёС†Р°
+		for (int j = 1; j < FRAME_WIDTH - 1; ++j)	// РРґС‘Рј РїРѕ РІРµСЂС‚РёРєР°Р»Рё
 		{
-			frame[i] += " ";						// Пробелы внутри рамки
+			frame[i] += " ";						// РџСЂРѕР±РµР»С‹ РІРЅСѓС‚СЂРё СЂР°РјРєРё
 		}
-		frame[i] += "|";							// Правая граница
+		frame[i] += "|";							// РџСЂР°РІР°СЏ РіСЂР°РЅРёС†Р°
 	}
 
 
 	for (int diceNum = 0; diceNum < dicesSize; diceNum++)
 	{
-		// Получаем кубик
+		// РџРѕР»СѓС‡Р°РµРј РєСѓР±РёРє
 		char Dice[FULLSIZE_Y][FULLSIZE_X];
 		CreateDice(Dice, dice[diceNum].face);
 
-		// Вставляем кубик в рамку
+		// Р’СЃС‚Р°РІР»СЏРµРј РєСѓР±РёРє РІ СЂР°РјРєСѓ
 		for (size_t i = 0; i < FULLSIZE_Y; ++i)
 		{
 			for (size_t j = 0; j < FULLSIZE_X; ++j)
@@ -176,7 +176,7 @@ void DisplayFrame(Dice dice[], size_t dicesSize)
 	}
 
 
-	// Выводим рамку с кубиком на экран
+	// Р’С‹РІРѕРґРёРј СЂР°РјРєСѓ СЃ РєСѓР±РёРєРѕРј РЅР° СЌРєСЂР°РЅ
 	for (const std::string& row : frame)
 	{
 		std::cout << row << std::endl;
@@ -184,14 +184,14 @@ void DisplayFrame(Dice dice[], size_t dicesSize)
 }
 
 
-// Обнаружение столкновений
+// РћР±РЅР°СЂСѓР¶РµРЅРёРµ СЃС‚РѕР»РєРЅРѕРІРµРЅРёР№
 bool IsColliding(const Dice& a, const Dice& b)
 {
 	return (a.x < b.x + FULLSIZE_X + 1 && a.x + FULLSIZE_X + 1 > b.x &&
 		a.y < b.y + FULLSIZE_Y + 1 && a.y + FULLSIZE_Y + 1 > b.y);
 }
 
-// Остановка скорости
+// РћСЃС‚Р°РЅРѕРІРєР° СЃРєРѕСЂРѕСЃС‚Рё
 void StopSpeed(Dice& dice, int stop_threshold, bool typeSpeed)
 {
 	if (typeSpeed = true)
@@ -216,7 +216,7 @@ void ResolveOverlap(Dice& a, Dice& b)
 	int overlapX = std::min(a.x + FULLSIZE_X, b.x + FULLSIZE_X) - std::max(a.x, b.x);
 	int overlapY = std::min(a.y + FULLSIZE_Y, b.y + FULLSIZE_Y) - std::max(a.y, b.y);
 
-	if (overlapX < overlapY) // Смещение по X
+	if (overlapX < overlapY) // РЎРјРµС‰РµРЅРёРµ РїРѕ X
 	{
 		if (a.x < b.x)
 			a.x -= overlapX / 2, b.x += overlapX / 2;
@@ -225,7 +225,7 @@ void ResolveOverlap(Dice& a, Dice& b)
 		a.vx = -a.vx;
 		b.vx = -b.vx;
 	}
-	else // Смещение по Y
+	else // РЎРјРµС‰РµРЅРёРµ РїРѕ Y
 	{
 		if (a.y < b.y)
 			a.y -= overlapY / 2, b.y += overlapY / 2;
@@ -252,20 +252,20 @@ void ElasticCollision(Dice& a, Dice& b)
 
 
 
-// Отталкивание кубиков от стенок
+// РћС‚С‚Р°Р»РєРёРІР°РЅРёРµ РєСѓР±РёРєРѕРІ РѕС‚ СЃС‚РµРЅРѕРє
 void KeepInsideBounds(Dice diceArray[], size_t dicesSize)
 {
 	for (size_t currentDice = 0; currentDice < dicesSize; currentDice++)
 	{
 
-		if (diceArray[currentDice].x <= 0)									// Если кубик столкнулся с левой границей
+		if (diceArray[currentDice].x <= 0)									// Р•СЃР»Рё РєСѓР±РёРє СЃС‚РѕР»РєРЅСѓР»СЃСЏ СЃ Р»РµРІРѕР№ РіСЂР°РЅРёС†РµР№
 		{
 			diceArray[currentDice].x = 0;
 			diceArray[currentDice].vx = -diceArray[currentDice].vx * (damping + 2) / 10;
 
 			StopSpeed(diceArray[currentDice], stop_threshold, true);
 		}
-		else if (diceArray[currentDice].x >= MAX_INDENT_X)					// Если кубик столкнулся с правой границей
+		else if (diceArray[currentDice].x >= MAX_INDENT_X)					// Р•СЃР»Рё РєСѓР±РёРє СЃС‚РѕР»РєРЅСѓР»СЃСЏ СЃ РїСЂР°РІРѕР№ РіСЂР°РЅРёС†РµР№
 		{
 			diceArray[currentDice].x = MAX_INDENT_X;
 			diceArray[currentDice].vx = -diceArray[currentDice].vx * (damping + 2) / 10;
@@ -273,14 +273,14 @@ void KeepInsideBounds(Dice diceArray[], size_t dicesSize)
 			StopSpeed(diceArray[currentDice], stop_threshold, true);
 		}
 
-		if (diceArray[currentDice].y <= 0)									// Если кубик столкнулся с верхней границей
+		if (diceArray[currentDice].y <= 0)									// Р•СЃР»Рё РєСѓР±РёРє СЃС‚РѕР»РєРЅСѓР»СЃСЏ СЃ РІРµСЂС…РЅРµР№ РіСЂР°РЅРёС†РµР№
 		{
 			diceArray[currentDice].y = 0;
 			diceArray[currentDice].vy = -diceArray[currentDice].vy * damping / 10;
 
 			StopSpeed(diceArray[currentDice], stop_threshold, false);
 		}
-		else if (diceArray[currentDice].y >= MAX_INDENT_Y)					// Если кубик столкнулся с нижней границей
+		else if (diceArray[currentDice].y >= MAX_INDENT_Y)					// Р•СЃР»Рё РєСѓР±РёРє СЃС‚РѕР»РєРЅСѓР»СЃСЏ СЃ РЅРёР¶РЅРµР№ РіСЂР°РЅРёС†РµР№
 		{
 			diceArray[currentDice].y = MAX_INDENT_Y;
 			diceArray[currentDice].vy = -diceArray[currentDice].vy * (damping - 0.1) / 10;
@@ -304,7 +304,7 @@ int GenerateRandomSize(int i)
 	return rand() % i + 1;
 }
 
-// Случайная грань для анимации
+// РЎР»СѓС‡Р°Р№РЅР°СЏ РіСЂР°РЅСЊ РґР»СЏ Р°РЅРёРјР°С†РёРё
 void GenerateDiceFaces(Dice diceArray[], size_t dicesSize)
 {
 	for (size_t i = 0; i < dicesSize; i++)
@@ -338,16 +338,16 @@ bool StopAnimation(Dice diceArray[], size_t dicesSize)
 
 int main()
 {
-	// Создание кубиков
+	// РЎРѕР·РґР°РЅРёРµ РєСѓР±РёРєРѕРІ
 	Dice diceArray[diceQuantity];
 	for (int i = 0; i < diceQuantity; i++)
 	{
 		diceArray[i] = { GenerateRandomSize(5), GenerateRandomSize(3), 0, 0, i + 1 };
-		diceArray[i].vx = GenerateRandomSize(21) - 10;							// Случайная горизонтальная скорость от -10 до 10
-		diceArray[i].vy = -GenerateRandomSize(6) - 5;							// Случайная вертикальная скорость от -10 до -5 (отрицательная, т.к. кубик подбрасывается вверх)
+		diceArray[i].vx = GenerateRandomSize(21) - 10;							// РЎР»СѓС‡Р°Р№РЅР°СЏ РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅР°СЏ СЃРєРѕСЂРѕСЃС‚СЊ РѕС‚ -10 РґРѕ 10
+		diceArray[i].vy = -GenerateRandomSize(6) - 5;							// РЎР»СѓС‡Р°Р№РЅР°СЏ РІРµСЂС‚РёРєР°Р»СЊРЅР°СЏ СЃРєРѕСЂРѕСЃС‚СЊ РѕС‚ -10 РґРѕ -5 (РѕС‚СЂРёС†Р°С‚РµР»СЊРЅР°СЏ, С‚.Рє. РєСѓР±РёРє РїРѕРґР±СЂР°СЃС‹РІР°РµС‚СЃСЏ РІРІРµСЂС…)
 	}
 
-	// После спавна раздвигаем кубики
+	// РџРѕСЃР»Рµ СЃРїР°РІРЅР° СЂР°Р·РґРІРёРіР°РµРј РєСѓР±РёРєРё
 	for (size_t i = 0; i < diceQuantity; i++)
 	{
 		for (size_t j = i + 1; j < diceQuantity; j++)
@@ -359,22 +359,22 @@ int main()
 		}
 	}
 
-	// Цикл движения и разрешения столкновений
+	// Р¦РёРєР» РґРІРёР¶РµРЅРёСЏ Рё СЂР°Р·СЂРµС€РµРЅРёСЏ СЃС‚РѕР»РєРЅРѕРІРµРЅРёР№
 	for (int frame = 0; frame < num_frames; ++frame)
 	{
 		system(CLEAR_SCREEN);
 
 		for (size_t currentDice = 0; currentDice < diceQuantity; currentDice++)
 		{
-			// Применяем гравитацию
-			diceArray[currentDice].vy += gravity;													// Увеличиваем вертикальную скорость на величину ускорения свободного падения
+			// РџСЂРёРјРµРЅСЏРµРј РіСЂР°РІРёС‚Р°С†РёСЋ
+			diceArray[currentDice].vy += gravity;													// РЈРІРµР»РёС‡РёРІР°РµРј РІРµСЂС‚РёРєР°Р»СЊРЅСѓСЋ СЃРєРѕСЂРѕСЃС‚СЊ РЅР° РІРµР»РёС‡РёРЅСѓ СѓСЃРєРѕСЂРµРЅРёСЏ СЃРІРѕР±РѕРґРЅРѕРіРѕ РїР°РґРµРЅРёСЏ
 
-			// Обновляем позицию кубика
-			diceArray[currentDice].x += diceArray[currentDice].vx;									// Изменяем горизонтальную координату
-			diceArray[currentDice].y += diceArray[currentDice].vy;									// Изменяем вертикальную координату
+			// РћР±РЅРѕРІР»СЏРµРј РїРѕР·РёС†РёСЋ РєСѓР±РёРєР°
+			diceArray[currentDice].x += diceArray[currentDice].vx;									// РР·РјРµРЅСЏРµРј РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅСѓСЋ РєРѕРѕСЂРґРёРЅР°С‚Сѓ
+			diceArray[currentDice].y += diceArray[currentDice].vy;									// РР·РјРµРЅСЏРµРј РІРµСЂС‚РёРєР°Р»СЊРЅСѓСЋ РєРѕРѕСЂРґРёРЅР°С‚Сѓ
 
 
-			// Столкновения кубиков
+			// РЎС‚РѕР»РєРЅРѕРІРµРЅРёСЏ РєСѓР±РёРєРѕРІ
 			for (size_t i = 0; i < diceQuantity; i++)
 			{
 				for (size_t j = i + 1; j < diceQuantity; j++)
@@ -387,26 +387,26 @@ int main()
 				}
 			}
 
-			// Обработка столкновений с границами
+			// РћР±СЂР°Р±РѕС‚РєР° СЃС‚РѕР»РєРЅРѕРІРµРЅРёР№ СЃ РіСЂР°РЅРёС†Р°РјРё
 			KeepInsideBounds(diceArray, diceQuantity);
 
 		}
 
-		// Генерим грани у кубика
+		// Р“РµРЅРµСЂРёРј РіСЂР°РЅРё Сѓ РєСѓР±РёРєР°
 		GenerateDiceFaces(diceArray, diceQuantity);
 
-		// Отрисовка текущего кадра
+		// РћС‚СЂРёСЃРѕРІРєР° С‚РµРєСѓС‰РµРіРѕ РєР°РґСЂР°
 		DisplayFrame(diceArray, diceQuantity);
 
 
-		// Условие остановки анимации: кубики на полу и скорости близки к нулю
+		// РЈСЃР»РѕРІРёРµ РѕСЃС‚Р°РЅРѕРІРєРё Р°РЅРёРјР°С†РёРё: РєСѓР±РёРєРё РЅР° РїРѕР»Сѓ Рё СЃРєРѕСЂРѕСЃС‚Рё Р±Р»РёР·РєРё Рє РЅСѓР»СЋ
 		if (StopAnimation(diceArray, diceQuantity)) break;
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(time_step));	// Пауза между кадрами
+		std::this_thread::sleep_for(std::chrono::milliseconds(time_step));	// РџР°СѓР·Р° РјРµР¶РґСѓ РєР°РґСЂР°РјРё
 	}
 
-	system(CLEAR_SCREEN);													// Очищаем экран перед выводом результата
-	DisplayFrame(diceArray, diceQuantity);									// Отображаем кубик с результатом
+	system(CLEAR_SCREEN);													// РћС‡РёС‰Р°РµРј СЌРєСЂР°РЅ РїРµСЂРµРґ РІС‹РІРѕРґРѕРј СЂРµР·СѓР»СЊС‚Р°С‚Р°
+	DisplayFrame(diceArray, diceQuantity);									// РћС‚РѕР±СЂР°Р¶Р°РµРј РєСѓР±РёРє СЃ СЂРµР·СѓР»СЊС‚Р°С‚РѕРј
 
 	int result = 0;
 	for (size_t i = 0; i < diceQuantity; i++)
